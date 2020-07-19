@@ -1,15 +1,10 @@
 package with.developer.myapplication.Fragment;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import android.service.autofill.Dataset;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +16,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import with.developer.myapplication.Adapter.PostAdapter;
@@ -33,6 +30,8 @@ public class HomeFragment extends Fragment {
     private PostAdapter postAdapter;
     private List<Post> postLists;
     private List<String> followingList;
+
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +48,7 @@ public class HomeFragment extends Fragment {
         postAdapter=new PostAdapter(getContext(),postLists);
         recyclerView.setAdapter(postAdapter);
 
+        progressBar=view.findViewById(R.id.progress_circular);
         checkFollowing();
 
         return view;
@@ -91,6 +91,7 @@ public class HomeFragment extends Fragment {
                     }
                 }
                 postAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
