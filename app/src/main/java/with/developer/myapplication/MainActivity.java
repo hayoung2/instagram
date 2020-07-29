@@ -1,13 +1,5 @@
 package with.developer.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import with.developer.myapplication.Fragment.HomeFragment;
-import with.developer.myapplication.Fragment.NotificationFragment;
-import with.developer.myapplication.Fragment.ProfileFragment;
-import with.developer.myapplication.Fragment.SearchFragment;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +7,14 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import with.developer.myapplication.Fragment.HomeFragment;
+import with.developer.myapplication.Fragment.NotificationFragment;
+import with.developer.myapplication.Fragment.ProfileFragment;
+import with.developer.myapplication.Fragment.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,8 +29,20 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
+        Bundle intent=getIntent().getExtras();
+        if (intent!=null){
+            String publisher =intent.getString("publisherid");
+            SharedPreferences.Editor editor=getSharedPreferences("PREFS",MODE_PRIVATE).edit();
+            editor.putString("profileid",publisher);
+            editor.apply();
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new ProfileFragment()).commit();
+        }else{
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment()).commit();
+        }
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener=
