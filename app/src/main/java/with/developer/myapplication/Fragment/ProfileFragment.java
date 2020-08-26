@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import with.developer.myapplication.Adapter.MyfotoAdapter;
 import with.developer.myapplication.EditProfileActivity;
+import with.developer.myapplication.FollowersActivity;
 import with.developer.myapplication.Model.Post;
 import with.developer.myapplication.Model.User;
 import with.developer.myapplication.R;
@@ -121,6 +123,7 @@ public class ProfileFragment extends Fragment {
                             .child("following").child(profileid).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("followers").child(profileid).setValue(true);
+                    addNotifications();
                 }else if (btn.equals("following")){
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid()).child("following").child(profileid)
                             .removeValue();
@@ -145,10 +148,38 @@ public class ProfileFragment extends Fragment {
                 recyclerView_saves.setVisibility(View.VISIBLE);
             }
         });
-
+        followers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), FollowersActivity.class);
+                intent.putExtra("id",profileid);
+                intent.putExtra("title","followers");
+                startActivity(intent);
+            }
+        });
+        following.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), FollowersActivity.class);
+                intent.putExtra("id",profileid);
+                intent.putExtra("title","following");
+                startActivity(intent);
+            }
+        });
 
         return view;
 
+    }
+
+    private void addNotifications(){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Notifications").child(profileid);
+        HashMap<String,Object> hashMap=new HashMap<>();
+        hashMap.put("userid",firebaseUser.getUid());
+        hashMap.put("text","started following you");
+        hashMap.put("postid","");
+        hashMap.put("ispost",false);
+
+        reference.push().setValue(hashMap);
     }
 
     private void userInfo() {
