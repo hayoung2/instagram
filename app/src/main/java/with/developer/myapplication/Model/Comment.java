@@ -3,11 +3,13 @@ package with.developer.myapplication.Model;
 public class Comment {
     private String publisher;
     private String comment;
+    private String commentid;
 
 
-    public Comment(String comment, String publisher) {
+    public Comment(String comment, String publisher,String commentid) {
         this.comment = comment;
         this.publisher = publisher;
+        this.commentid=commentid;
     }
     public Comment() {
 
@@ -30,9 +32,11 @@ public class Comment {
     }
 
 
+    public String getCommentid() {
+        return commentid;
+    }
 
-
-
-
-
+    public void setCommentid(String commentid) {
+        this.commentid = commentid;
+    }
 }

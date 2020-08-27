@@ -36,6 +36,7 @@ import with.developer.myapplication.EditProfileActivity;
 import with.developer.myapplication.FollowersActivity;
 import with.developer.myapplication.Model.Post;
 import with.developer.myapplication.Model.User;
+import with.developer.myapplication.OptionsActivity;
 import with.developer.myapplication.R;
 
 
@@ -130,6 +131,13 @@ public class ProfileFragment extends Fragment {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid).child("followers").child(firebaseUser.getUid())
                             .removeValue();
                 }
+            }
+        });
+        options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), OptionsActivity.class);
+                startActivity(intent);
             }
         });
 
