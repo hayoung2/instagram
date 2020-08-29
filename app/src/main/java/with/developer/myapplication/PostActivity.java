@@ -122,7 +122,7 @@ public class PostActivity extends AppCompatActivity {
                         finish();
 
                     }else{
-                        Toast.makeText(PostActivity.this,"Failed",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PostActivity.this,"실패",Toast.LENGTH_SHORT).show();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {

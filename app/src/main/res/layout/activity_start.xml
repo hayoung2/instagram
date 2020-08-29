@@ -7,18 +7,23 @@
     android:orientation="vertical"
     tools:context=".StartActivity">
 
-    <Button
+    <ImageView
         android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/education" />
+    <Button
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:id="@+id/login"
-        android:text="Login"
+        android:text="로그인"
         android:textColor="@color/colorPrimary"
         android:background="@drawable/button_background"
         android:layout_marginTop="15dp"/>
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="회원가입"
         android:id="@+id/register"
         android:layout_marginTop="15dp"
         android:textColor="@color/colorPrimary"

@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import with.developer.myapplication.Fragment.PostDetailFragment;
 import with.developer.myapplication.Fragment.ProfileFragment;
 import with.developer.myapplication.Model.Notification;
-import with.developer.myapplication.Model.Post;
 import with.developer.myapplication.Model.User;
 import with.developer.myapplication.R;
 
@@ -69,6 +68,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
                     ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new PostDetailFragment()).commit();
+
                 } else {
                     SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                     editor.putString("profileid", notification.getUserid());
@@ -77,6 +77,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new ProfileFragment()).commit();
                 }
+
             }
         });
 
@@ -112,8 +113,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                Glide.with(mContext).load(user.getImageurl()).into(imageView);
-                username.setText("라라라");
+                    Glide.with(mContext).load(user.getImageurl()).into(imageView);
+                username.setText(user.getUsername());
             }
 
             @Override
@@ -130,8 +131,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Post post = dataSnapshot.getValue(Post.class);
-                Glide.with(mContext).load(post.getPostimage()).into(post_image);
+//                Post post = dataSnapshot.getValue(Post.class);
+//                Glide.with(mContext).load(post.getPostimage()).into(post_image);
             }
 
             @Override

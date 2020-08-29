@@ -288,7 +288,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolde
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("userid", firebaseUser.getUid());
-        hashMap.put("text", "liked your post");
+        hashMap.put("text", "당신의 게시글을 좋아합니다");
         hashMap.put("postid", postid);
         hashMap.put("ispost", true);
 
@@ -325,7 +325,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolde
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                likes.setText(dataSnapshot.getChildrenCount() + " likes");
+                likes.setText("좋아요 "+dataSnapshot.getChildrenCount() + "개");
             }
 
             @Override
@@ -341,7 +341,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolde
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                comments.setText("View All " + dataSnapshot.getChildrenCount() + " Comments");
+                comments.setText("댓글 " + dataSnapshot.getChildrenCount() + "개 모두보기");
             }
 
             @Override
@@ -423,7 +423,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolde
 
     private void editPost(final String postid) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
-        alertDialog.setTitle("Edit Post");
+        alertDialog.setTitle("내용 수정");
 
         final EditText editText = new EditText(mContext);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
@@ -434,7 +434,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolde
 
         getText(postid, editText);
 
-        alertDialog.setPositiveButton("Edit",
+        alertDialog.setPositiveButton("수정",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -446,7 +446,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolde
                                 .child(postid).updateChildren(hashMap);
                     }
                 });
-        alertDialog.setNegativeButton("Cancel",
+        alertDialog.setNegativeButton("취소",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

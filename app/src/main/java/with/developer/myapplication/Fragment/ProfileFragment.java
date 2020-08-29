@@ -106,7 +106,7 @@ public class ProfileFragment extends Fragment {
         mysaves();
 
         if (profileid.equals(firebaseUser.getUid())){
-            edit_profile.setText("Edit Profile");
+            edit_profile.setText("프로필 편집");
         }else{
             checkFollow();
             saved_fotos.setVisibility(View.GONE);
@@ -117,7 +117,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 String btn=edit_profile.getText().toString();
 
-                if (btn.equals("Edit Profile")){
+                if (btn.equals("프로필 편집")){
                     startActivity(new Intent(getContext(), EditProfileActivity.class));
                 }else if(btn.equals("follow")){
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
@@ -183,7 +183,7 @@ public class ProfileFragment extends Fragment {
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Notifications").child(profileid);
         HashMap<String,Object> hashMap=new HashMap<>();
         hashMap.put("userid",firebaseUser.getUid());
-        hashMap.put("text","started following you");
+        hashMap.put("text","당신을 팔로우 하였습니다.");
         hashMap.put("postid","");
         hashMap.put("ispost",false);
 

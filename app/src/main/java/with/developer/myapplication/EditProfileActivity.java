@@ -132,7 +132,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         reference.updateChildren(map);
 
-        Toast.makeText(EditProfileActivity.this, "Successfully updated!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(EditProfileActivity.this, "수정되었습니다", Toast.LENGTH_SHORT).show();
     }
 
     private String getFileExtension(Uri uri){
@@ -143,7 +143,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void uploadImage(){
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Uploading");
+        pd.setMessage("업로드..");
         pd.show();
         if (mImageUri != null){
             final StorageReference fileReference = storageRef.child(System.currentTimeMillis()
@@ -184,7 +184,7 @@ public class EditProfileActivity extends AppCompatActivity {
             });
 
         } else {
-            Toast.makeText(EditProfileActivity.this, "No image selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditProfileActivity.this, "이미지를 선택해주세요", Toast.LENGTH_SHORT).show();
         }
     }
 

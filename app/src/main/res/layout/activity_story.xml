@@ -50,7 +50,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:id="@+id/story_photo"/>
+            android:id="@+id/story_photo"
+            android:src="@drawable/ic_user"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -80,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_save" />
+            android:src="@drawable/ic_eyes" />
 
         <TextView
             android:layout_width="wrap_content"

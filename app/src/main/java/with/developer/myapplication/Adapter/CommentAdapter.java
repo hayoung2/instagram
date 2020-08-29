@@ -74,12 +74,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 mContext.startActivity(intent);
             }
         });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
+            public void onClick(View view) {
                 if (comment.getPublisher().equals(firebaseUser.getUid())){
                     AlertDialog alertDialog=new AlertDialog.Builder(mContext).create();
-                    alertDialog.setTitle("Do you want delete?");
+                    alertDialog.setTitle("삭제할까요?");
                     alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No"
                             , new DialogInterface.OnClickListener() {
                                 @Override
@@ -106,7 +106,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                             });
                     alertDialog.show();
                 }
-                return true;
             }
         });
     }

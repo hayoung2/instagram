@@ -20,8 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -89,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                                 });
                             }else {
                                 pd.dismiss();
-                                Toast.makeText(LoginActivity.this,"Auth 실패",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this,"해당 아이디가 없습니다",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

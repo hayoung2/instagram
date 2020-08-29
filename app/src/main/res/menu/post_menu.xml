@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/edit"
-        android:title="Edit"/>
+        android:title="수정"/>
 
     <item android:id="@+id/delete"
-        android:title="Delete"/>
+        android:title="삭제"/>
 
     <item android:id="@+id/report"
-        android:title="Report"/>
+        android:title="공유"/>
 </menu>

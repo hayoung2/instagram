@@ -99,7 +99,7 @@ public class AddStoryActivity extends AppCompatActivity {
                         finish();
 
                     } else {
-                        Toast.makeText(AddStoryActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddStoryActivity.this, "실패", Toast.LENGTH_SHORT).show();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -110,7 +110,7 @@ public class AddStoryActivity extends AppCompatActivity {
             });
 
         } else {
-            Toast.makeText(AddStoryActivity.this, "No image selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddStoryActivity.this, "이미지를 선택해주세요", Toast.LENGTH_SHORT).show();
         }
     }
 
