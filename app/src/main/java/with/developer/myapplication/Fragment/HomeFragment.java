@@ -19,6 +19,7 @@ import java.util.List;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import with.developer.myapplication.Adapter.PostAdapter;
 import with.developer.myapplication.Adapter.StoryAdapter;
 import with.developer.myapplication.Model.Post;
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment {
     private List<Story> storyList;
 
     private List<String> followingList;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     ProgressBar progress_circular;
 
@@ -63,12 +65,23 @@ public class HomeFragment extends Fragment {
         storyAdapter = new StoryAdapter(getContext(), storyList);
         recyclerView_story.setAdapter(storyAdapter);
 
+        mSwipeRefreshLayout=view.findViewById(R.id.swipe_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                readPosts();
+                readStory();
+
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
         progress_circular = view.findViewById(R.id.progress_circular);
 
         checkFollowing();
 
         return view;
     }
+
 
     private void checkFollowing(){
         followingList = new ArrayList<>();

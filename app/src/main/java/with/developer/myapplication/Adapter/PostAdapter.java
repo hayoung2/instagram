@@ -51,6 +51,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolde
     private List<Post> mPosts;
 
     private FirebaseUser firebaseUser;
+    private DatabaseReference firebaseDatabase;
 
     public PostAdapter(Context context, List<Post> posts) {
         mContext = context;
@@ -67,9 +68,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolde
     @Override
     public void onBindViewHolder(@NonNull final PostAdapter.ImageViewHolder holder, final int position) {
 
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final Post post = mPosts.get(position);
 
+        firebaseDatabase=FirebaseDatabase.getInstance().getReference("Posts").child(post.getPostid());
         Glide.with(mContext).load(post.getPostimage())
                 .apply(new RequestOptions().placeholder(R.drawable.placeholder))
                 .into(holder.post_image);
@@ -217,7 +220,26 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolde
                                         });
                                 return true;
                             case R.id.report:
-                                Toast.makeText(mContext, "Reported clicked!", Toast.LENGTH_SHORT).show();
+                                firebaseDatabase.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Post post= snapshot.getValue(Post.class);
+                                        Intent msg = new Intent(Intent.ACTION_SEND);
+                                        msg.putExtra(Intent.EXTRA_SUBJECT,"공유된 사진" );
+//type of things
+                                        msg.putExtra(Intent.EXTRA_TEXT, post.getPostimage());
+
+
+                                        msg.setType("text/plain");
+
+                                        mContext.startActivity(Intent.createChooser(msg, "공유"));
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                                 return true;
                             default:
                                 return false;
@@ -431,6 +453,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolde
                         dialogInterface.cancel();
                     }
                 });
+
         alertDialog.show();
     }
 
